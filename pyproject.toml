@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aws-lambda-on-docker-demo"
-version = "0.3.0"
+version = "1.0.0"
 description = "This is a demo repo to demonstrate the use of a dockerized AWS lambda function"
 authors = ["Guillaume Gonde <guillaume.gonde@sicara.com>"]
 license = "MIT"
