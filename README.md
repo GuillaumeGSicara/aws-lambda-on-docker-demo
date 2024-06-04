@@ -3,8 +3,8 @@
 This repo aims to demonstrate the use of AWS lambda function using a Dockerized image.
 It uses the following tools
 
-- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-- An AWS account with sufficient permissions (MakeFile interaction)
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) (MakeFile interaction)
+- An AWS account with sufficient permissions
 - [Terraform](https://www.terraform.io/) (IaC)
 - [Docker](https://www.docker.com/) (container)
 
