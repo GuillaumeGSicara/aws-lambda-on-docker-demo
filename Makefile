@@ -9,10 +9,9 @@ create-registry:
 		cd ./tf/ecr/; terraform refresh; \
 		REPO_URL=$$(terraform output -raw repository_url); \
    		REPO_URL=$${REPO_URL//\"}; \
-		REPOSITORY_NAME=$$(echo $$REPO_URL | awk -F/ '{print $$NF}'); \
 		aws ecr get-login-password --region $$AWS_REGION | docker login --username AWS --password-stdin $$REPO_URL; \
-		cd -; docker build --no-cache --platform linux/amd64 -t lambda-function-demo-image:latest .; \
-		docker tag $$REPOSITORY_NAME:latest $$REPO_URL:latest; \
+		cd -; docker build --no-cache --platform linux/amd64 -t lambda-function-demo-image:latest -f Dockerfile.custom .; \
+		docker tag lambda-function-demo-image:latest $$REPO_URL:latest; \
 		docker push $$REPO_URL:latest
 
 

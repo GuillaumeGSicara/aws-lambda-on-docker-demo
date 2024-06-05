@@ -1,0 +1,31 @@
+# Check https://docs.aws.amazon.com/lambda/latest/dg/python-image.html
+
+ARG FUNCTION_DIR="/function"
+
+FROM python:3.9 as build-image
+
+ARG FUNCTION_DIR
+
+# Copy function code
+RUN mkdir -p ${FUNCTION_DIR}
+COPY src/main.py ${FUNCTION_DIR}/main.py
+
+RUN pip install \
+    --target ${FUNCTION_DIR} \
+        awslambdaric
+
+FROM python:3.9-slim
+
+ARG FUNCTION_DIR
+
+WORKDIR ${FUNCTION_DIR}
+
+COPY --from=build-image ${FUNCTION_DIR} ${FUNCTION_DIR}
+COPY requirements.txt ${FUNCTION_DIR}
+
+RUN pip install --no-cache-dir -r requirements.txt
+ENV PATH="/function:${PATH}"
+
+ENTRYPOINT [ "/usr/local/bin/python", "-m", "awslambdaric" ]
+
+CMD [ "main.handler" ]

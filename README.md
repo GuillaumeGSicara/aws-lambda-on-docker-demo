@@ -8,6 +8,8 @@ It uses the following tools
 - [Terraform](https://www.terraform.io/) (IaC)
 - [Docker](https://www.docker.com/) (container)
 
+The repo allows you to choose between a python base image provided by aws `public.ecr.aws/lambda/python:3.XX` or from a custom image of your choice (See `Dockerfile` and `Dockerfile.custom` for each respective options)
+
 ## :wrench: Using MakeFile
 
 :warning: Don't forget to use a `.set-env.sh` file in the `tf/` folder
@@ -61,3 +63,8 @@ in the `tf/lambda` folder your will find the information to deploy your lambda f
 ## To test
 
 - Use poetry in the Dockerfile, poetry files have been added if you want to use these in the `DockerFile`
+
+
+## Identified Issues
+
+- Lambda function gets a KMS access denied to read from registry from time to time, deployement is not idempotent w.r.t that error
